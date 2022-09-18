@@ -54,6 +54,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CSRF_TRUSTED_ORIGINS = ["https://prajwal-job-board.herokuapp.com"]
 ROOT_URLCONF = 'job_board.urls'
 
 TEMPLATES = [
