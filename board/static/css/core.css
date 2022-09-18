@@ -1,0 +1,26 @@
+.main_bg{
+    background: #0F3460;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.bg{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.home{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.home_card{
+    border: solid 2px white;
+    background: white;
+    border-radius: 5%;
+}
+
+.job{
+    width: 100vh;
+}
