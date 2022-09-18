@@ -29,5 +29,6 @@ urlpatterns = [
     path('archievejob/<int:id>/<int:jobid>', views.archieve_job, name='archieve_job'),
     path('deletejob/<int:id>/<int:jobid>', views.delete_job, name='delete_job'),
     path('applyjob/<int:id>/<int:jobid>', views.apply_job, name='apply_job'),
+    path('checkoutjob/<int:id>/<int:jobid>', views.checkout_job, name='checkout_job'),
     path('candidates/<int:id>/<int:jobid>', views.candidates, name='candidates'),
 ]

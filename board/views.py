@@ -168,6 +168,7 @@ def apply_job(req, id, jobid):
         job = Job.objects.get(pk=jobid)
         job.people.add(req.user)
         job.save()
+        messages.success(req, "Job applied successfully!!")
         return HttpResponseRedirect('/dashboard/%i' % id)
     else:
         messages.warning(req, "You are not authorized to apply for a job")
@@ -188,4 +189,20 @@ def candidates(req, id, jobid):
         return render(req, 'candidates.html', {'category': category, 'candidates': cadets, 'group': id, 'job': job})
     else:
         messages.warning(req, "You are not authorized to view candidates.")
+        return HttpResponseRedirect('/')
+
+
+def checkout_job(req, id, jobid):
+    if id==1:
+        user_group = Group.objects.get(name = 'Terraformers')
+        category = 'Terraformer'
+    else:
+        user_group = Group.objects.get(name = 'Applicants')
+        category = 'Applicant'
+    user_group = Group.objects.get(name = 'Applicants')
+    if req.user.is_authenticated and user_group == req.user.groups.all()[0]:
+        job = Job.objects.get(pk=jobid)
+        return render(req, 'checkout.html', {'category': category, 'group': id, 'job': job})
+    else:
+        messages.warning(req, "You are can view it in the candidates section.")
         return HttpResponseRedirect('/')
