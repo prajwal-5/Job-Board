@@ -37,10 +37,16 @@
       {% endif %}
   </div>
   
-  <div class = "my-5">
+  <div id="jobs" class = "my-5">
     {% for job in jobs %}
     {% if not job.is_archieved %}
-    <div class="card my-4 bg-{{job.bg_class}} text-white" style="width: 48rem;">
+    <div
+    {% if category == "Terraformer" %}
+    draggable="true" ondragstart="start()"  ondragover="dragover()" class="card my-4 bg-{{job.bg_class}} text-white resizable" 
+    style="width: 48rem; cursor: move;">
+    {% else %}
+    class="card my-4 bg-{{job.bg_class}} text-white" style="width: 48rem;">
+    {% endif %} 
       <div class="card-body">
         <div class="d-flex justify-content-between">
           <div><h5 class="card-title">{{job.title}}</h5></div>
@@ -80,6 +86,5 @@
     {% endfor %}
   </div>
   </div>
-  
 </div>    
 {% endblock content %}

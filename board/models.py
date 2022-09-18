@@ -13,6 +13,7 @@ class Job(models.Model):
     email = models.EmailField()
     is_archieved = models.BooleanField(default=False)
     people = models.ManyToManyField(get_user_model())
+    order = models.IntegerField(default=0, blank=True)
 
 
     @property
@@ -30,5 +31,9 @@ class Job(models.Model):
             return "warning"
         else:
             return "secondary"
+
+    
+    class Meta:
+        ordering = ['order', 'pk']
 
 
