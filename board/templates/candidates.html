@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load jobextra %}
 
 {% block content %}
 
@@ -37,18 +38,19 @@
   </div>
   
   <div class = "my-5">
-    <div class="card my-4" style="width: 48rem;">
+    <div class="card my-4 bg-{{job.bg_class}} text-white" style="width: 48rem;">
         <div class="card-body">
             <div class="d-flex justify-content-between">
                 <div><h3 class="card-title">{{job.title}}</h3></div>
-                <div><button type="button" class="btn btn-primary">
-                  {{job.deadline}}
-                </button></div>
+                <div>
+                  <button type="button" class="btn btn-primary">{{job.deadline}}</button>
+                  <button type="button" class="btn btn-dark">{{job.days_left.days}} days left</button>
+                </div>
             </div>
-              <h6 class="card-subtitle mb-2 text-muted">{{job.location}}</h6>
-              <p class="card-text">{{job.description}}</p>
-              <h6 class="card-subtitle mb-2 text-muted">{{job.email}}</h6>
-              <h6 class="card-subtitle mb-2 text-muted">{{job.mobile}}</h6>
+              <h6 class="card-subtitle mb-2">{{job.location}}</h6>
+              <p class="card-text">{{job.description|convert_markdown|safe}}</p>
+              <h6 class="card-subtitle mb-2">{{job.email}}</h6>
+              <h6 class="card-subtitle mb-2">{{job.mobile}}</h6>
             <div class="d-flex justify-content-between">
                 <div><h3 class="card-title mt-5 mb-3">Interested Candidates</h3></div>
                 <div><a class="btn btn-outline-primary" aria-current="page" href="{%url 'dashboard' group %}"> Back to Dashboard</a></div>
