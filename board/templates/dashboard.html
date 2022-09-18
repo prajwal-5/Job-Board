@@ -42,7 +42,8 @@
     {% if not job.is_archieved %}
     <div
     {% if category == "Terraformer" %}
-    draggable="true" ondragstart="start()"  ondragover="dragover()" class="card my-4 bg-{{job.bg_class}} text-white resizable" 
+    id="{{job.id}}"
+    draggable="true" ondragstart="start()"  ondragover="dragover()" class="card my-4 bg-{{job.bg_class}} text-white" 
     style="width: 48rem; cursor: move;">
     {% else %}
     class="card my-4 bg-{{job.bg_class}} text-white" style="width: 48rem;">
