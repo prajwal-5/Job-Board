@@ -39,19 +39,22 @@
   <div class = "my-5">
     {% for job in jobs %}
     {% if not job.is_archieved %}
-    <div class="card my-4" style="width: 48rem;">
+    <div class="card my-4 bg-{{job.bg_class}} text-white" style="width: 48rem;">
       <div class="card-body">
         <div class="d-flex justify-content-between">
           <div><h5 class="card-title">{{job.title}}</h5></div>
-          <div><button type="button" class="btn btn-primary">
-            {{job.deadline}}
-          </button></div>
+          <div>
+            <button type="button" class="btn btn-primary">{{job.deadline}}</button>
+            <button type="button" class="btn btn-dark">{{job.days_left.days}} days left</button>
+          </div>
         </div>
-        <h6 class="card-subtitle mb-2 text-muted">{{job.location}}</h6>
+        <h6 class="card-subtitle mb-2">{{job.location}}</h6>
         <p class="card-text">{{job.description}}</p>
-        <h6 class="card-subtitle mb-2 text-muted">{{job.email}}</h6>
-        <h6 class="card-subtitle mb-2 text-muted">{{job.mobile}}</h6>
-        <div class="d-flex justify-content-end">
+        <h6 class="card-subtitle mb-2">{{job.email}}</h6>
+        <h6 class="card-subtitle mb-2">{{job.mobile}}</h6>
+      </div>
+
+      <div class="card-footer d-flex justify-content-end bg-light">
           {% if category == "Terraformer" %}
             <a href="{% url 'edit_job' group job.id %}" class="btn btn-warning mx-4 px-4">Edit</a>
             <a href="{% url 'archieve_job' group job.id %}" class="btn btn-secondary mx-4 ">Archieve</a>
@@ -61,7 +64,6 @@
           {% if category == "Applicant" %}
             <a href="{% url 'apply_job' group job.id %}" class="btn btn-success mx-5">Apply</a>
           {% endif %}
-        </div>
       </div>
     </div>
     {% endif %}

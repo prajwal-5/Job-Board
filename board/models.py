@@ -1,6 +1,7 @@
 from email.policy import default
 from django.db import models
 from django.contrib.auth import get_user_model
+from datetime import date, timedelta
 
 # Create your models here.
 class Job(models.Model):
@@ -12,5 +13,22 @@ class Job(models.Model):
     email = models.EmailField()
     is_archieved = models.BooleanField(default=False)
     people = models.ManyToManyField(get_user_model())
+
+
+    @property
+    def days_left(self):
+        return self.deadline - date.today()
+
+
+    @property
+    def bg_class(self):
+        if self.days_left > timedelta(days=21):
+            return "success"
+        elif self.days_left < timedelta(days=3):
+            return "danger"
+        elif self.days_left < timedelta(days=14):
+            return "warning"
+        else:
+            return "secondary"
 
 
