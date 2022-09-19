@@ -82,7 +82,6 @@ def dashboard(req, id):
         for job in jobs:
             if Job.objects.get(pk=job.id).people.filter(id=req.user.id):
                 jobs_user[job.id] = True
-        print(jobs_user)
         return render(req, "dashboard.html", {'category': category, 'group': id, 'jobs': jobs, 'jobs_user': jobs_user})
     else:
         messages.warning(req, "You are not authorized to access this group.")

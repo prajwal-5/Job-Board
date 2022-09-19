@@ -22,6 +22,6 @@ function dragend(){
   let children= Array.from(e.target.parentNode.children);
   children.forEach(element => {
     console.log(element["id"]);
-    console.log('-----------------------')
   });
+  console.log('-----------------------')
 }

@@ -60,9 +60,9 @@
         <p class="card-text">{{job.description|convert_markdown|safe|truncatechars:55}} 
           <small>
             {% if category == "Applicant" %}
-              <a href="{% url 'checkout_job' group job.id %}">read more</a>
+              <a class="text-white" href="{% url 'checkout_job' group job.id %}">read more</a>
             {% else %}
-              <a href="{% url 'candidates' group job.id %}">read more</a>
+              <a class="text-white" href="{% url 'candidates' group job.id %}">read more</a>
             {% endif %}
           </small> 
         </p>
