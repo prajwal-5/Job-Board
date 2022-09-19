@@ -7,3 +7,8 @@ register = template.Library()
 @register.filter
 def convert_markdown(value):
     return markdown.markdown(value)
+
+
+@register.filter
+def get_value(dictionary, key):
+    return dictionary.get(key)

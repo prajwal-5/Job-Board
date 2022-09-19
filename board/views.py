@@ -2,8 +2,9 @@ from django.shortcuts import render, HttpResponseRedirect
 from .forms import LoginForm, SignUpForm, JobCreationForm
 from django.contrib import messages
 from django.contrib.auth.models import Group
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import get_user_model, authenticate, login, logout
 from .models import Job
+
 
 # Create your views here.
 
@@ -77,7 +78,12 @@ def dashboard(req, id):
 
     if req.user.is_authenticated and user_group == req.user.groups.all()[0]:
         jobs = Job.objects.all()
-        return render(req, "dashboard.html", {'category': category, 'group': id, 'jobs': jobs})
+        jobs_user = {}
+        for job in jobs:
+            if Job.objects.get(pk=job.id).people.filter(id=req.user.id):
+                jobs_user[job.id] = True
+        print(jobs_user)
+        return render(req, "dashboard.html", {'category': category, 'group': id, 'jobs': jobs, 'jobs_user': jobs_user})
     else:
         messages.warning(req, "You are not authorized to access this group.")
         return HttpResponseRedirect('/')
@@ -166,9 +172,13 @@ def apply_job(req, id, jobid):
     user_group = Group.objects.get(name = 'Applicants')
     if req.user.is_authenticated and user_group == req.user.groups.all()[0]:
         job = Job.objects.get(pk=jobid)
-        job.people.add(req.user)
+        if(job.people.filter(id=req.user.id)):
+            job.people.remove(req.user)
+            messages.success(req, "job Unappliced successfully")
+        else:
+            job.people.add(req.user)
+            messages.success(req, "Job applied successfully!!")
         job.save()
-        messages.success(req, "Job applied successfully!!")
         return HttpResponseRedirect('/dashboard/%i' % id)
     else:
         messages.warning(req, "You are not authorized to apply for a job")
@@ -202,7 +212,11 @@ def checkout_job(req, id, jobid):
     user_group = Group.objects.get(name = 'Applicants')
     if req.user.is_authenticated and user_group == req.user.groups.all()[0]:
         job = Job.objects.get(pk=jobid)
-        return render(req, 'checkout.html', {'category': category, 'group': id, 'job': job})
+        if job.people.filter(id=req.user.id):
+            is_applied = True
+        else:
+            is_applied = False
+        return render(req, 'checkout.html', {'category': category, 'group': id, 'job': job, 'is_applied': is_applied})
     else:
         messages.warning(req, "You are can view it in the candidates section.")
         return HttpResponseRedirect('/')

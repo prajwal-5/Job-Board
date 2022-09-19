@@ -55,7 +55,11 @@
         
         <div class="card-footer d-flex justify-content-end bg-light">
             <div><a class="btn btn-primary mx-4" aria-current="page" href="{%url 'dashboard' group %}"> Back to Dashboard</a></div>
-            <a href="{% url 'apply_job' group job.id %}" class="btn btn-success mx-4">Apply</a>
+            {% if is_applied %}
+              <a href="{% url 'apply_job' group job.id %}" class="btn btn-warning mx-4">Applied</a>
+            {% else %}
+              <a href="{% url 'apply_job' group job.id %}" class="btn btn-success mx-4">Apply</a>
+            {% endif %}
       </div>
     </div>
   </div>

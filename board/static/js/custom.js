@@ -15,3 +15,13 @@ function dragover(){
   else
     e.target.parentNode.before(row);
 }
+
+function dragend(){
+  var e = event;
+  e.preventDefault(); 
+  let children= Array.from(e.target.parentNode.children);
+  children.forEach(element => {
+    console.log(element["id"]);
+    console.log('-----------------------')
+  });
+}

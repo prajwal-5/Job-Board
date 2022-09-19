@@ -43,7 +43,7 @@
     <div
     {% if category == "Terraformer" %}
     id="{{job.id}}"
-    draggable="true" ondragstart="start()"  ondragover="dragover()" class="card my-4 bg-{{job.bg_class}} text-white" 
+    draggable="true" ondragstart="start()"  ondragover="dragover()" ondragend="dragend()" class="card my-4 bg-{{job.bg_class}} text-white" 
     style="width: 48rem; cursor: move;">
     {% else %}
     class="card my-4 bg-{{job.bg_class}} text-white" style="width: 48rem;">
@@ -79,7 +79,11 @@
           {% endif %}
           {% if category == "Applicant" %}
             <a href="{% url 'checkout_job' group job.id %}" class="btn btn-info mx-4">Checkout</a>
-            <a href="{% url 'apply_job' group job.id %}" class="btn btn-success mx-4">Apply</a>
+            {% if jobs_user|get_value:job.id %}
+              <a href="{% url 'apply_job' group job.id %}" class="btn btn-warning mx-4">Applied</a>
+            {% else %}
+              <a href="{% url 'apply_job' group job.id %}" class="btn btn-success mx-4">Apply</a>
+            {% endif %}
           {% endif %}
       </div>
     </div>
