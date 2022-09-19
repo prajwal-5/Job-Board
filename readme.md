@@ -11,6 +11,7 @@
 7. Smooth UI experience
 8. Stateless application hence uses Heroku Postgres as database.
 9. Dedicated Backend messages displayed on frontend for various invalid and valid requests.
+10. Markdown support in job description.
 
 
 ### Flow of the Web Application:
