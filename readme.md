@@ -19,35 +19,35 @@
 
 - Depending on which group you are part of you can see the respective list of doable tasks. Your group will be displayed on the top left corner of the screen. 
     
->    - If you are a Terraformer:
-        - You have the power to add, delete, edit and archieve the job openings for everyone else.
-        - You can view the Interested candidates for each job in the job board. 
-        - You can drag and drop to adjust the jobs.
-        - Your dashboard will look like this one:
+> If you are a Terraformer:
+- You have the power to add, delete, edit and archieve the job openings for everyone else.
+- You can view the Interested candidates for each job in the job board. 
+- You can drag and drop to adjust the jobs.
+- Your dashboard will look like this one:
 ![terraformer dashboard image](resources/terraformer-dashboard.PNG)
     
->    - If you are an Applicant:
-        - You can checkout and apply for the job openings.
-        - Your dashboard will look like this one:
+> If you are an Applicant:
+- You can checkout and apply for the job openings.
+- Your dashboard will look like this one:
 ![terraformer dashboard image](resources/applicant-dashboard.PNG)
 
 
 ### The Database Design of the Application:
 >    1. User Table:
-        - Default table provided by Django with many features such as authentication and authorization.
-        - Maintains 
+- Default table provided by Django with many features such as authentication and authorization.
+- Maintains 
 ```[ Username, First Name, Last Name, Email, Password ]``` 
 
 >    2. Group Table:
-        - It is also a default table provided by Django for Authentication and Authorization purposes.
-        - Two groups 
+- It is also a default table provided by Django for Authentication and Authorization purposes.
+- Two groups 
 ```[ Terraformer, Applicant ]``` 
-        are created and assigned to the users at the time of signup.
-        - With the help of this group the web application decides the authorization of a user.
+are created and assigned to the users at the time of signup.
+- With the help of this group the web application decides the authorization of a user.
 
 >    3. Job Table:
-        - This is the cutom table made by me for maintaining jobs and their relations with the user.
-        - It has 
+- This is the cutom table made by me for maintaining jobs and their relations with the user.
+- It has 
 ```[ Title, Description, location, deadline, mobile, email, is_archived, people, order ]``` 
             as fields and it also has many properties to support the business logic when needed. Here's a glimpse from the code:
 ![Database Schema](resources/database-schema.PNG)
@@ -72,6 +72,8 @@
 - Used Heroku for Deployment thus application is stateless.
 - Used SQLlite for devlopment and Heroku Postgres for deployment.
 - Linked heroku with github repository for seamless deployment.
+
+<br>
 
 > Hope you like my profile. Suggestions are welcome.
 > want to know more about me? 
