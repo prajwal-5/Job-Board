@@ -4,4 +4,4 @@ from .models import Job
 
 @admin.register(Job)
 class JobModelAdmin(admin.ModelAdmin):
-    list_display = ['id', 'title', 'location', 'deadline', 'email']
+    list_display = ['id', 'title', 'location', 'deadline', 'email', 'order']

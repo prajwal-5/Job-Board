@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.models import Group
 from django.contrib.auth import get_user_model, authenticate, login, logout
 from .models import Job
+from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
@@ -77,7 +78,7 @@ def dashboard(req, id):
         category = 'Applicant'
 
     if req.user.is_authenticated and user_group == req.user.groups.all()[0]:
-        jobs = Job.objects.all()
+        jobs = Job.objects.all().order_by('order')
         jobs_user = {}
         for job in jobs:
             if Job.objects.get(pk=job.id).people.filter(id=req.user.id):
@@ -86,6 +87,15 @@ def dashboard(req, id):
     else:
         messages.warning(req, "You are not authorized to access this group.")
         return HttpResponseRedirect('/')
+
+@csrf_exempt
+def dashboard_sort(req, id):
+    if req.method == 'POST' and req.user.is_authenticated:
+        jobs = Job.objects.all()
+        for job in jobs:
+            job.order = int(req.POST[str(job.id)])
+            job.save()
+    return HttpResponseRedirect('/dashboard/%i' % id)
 
 
 def archieved_jobs(req, id):

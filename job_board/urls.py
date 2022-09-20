@@ -31,4 +31,5 @@ urlpatterns = [
     path('applyjob/<int:id>/<int:jobid>', views.apply_job, name='apply_job'),
     path('checkoutjob/<int:id>/<int:jobid>', views.checkout_job, name='checkout_job'),
     path('candidates/<int:id>/<int:jobid>', views.candidates, name='candidates'),
+    path('dashboard/sort/<int:id>', views.dashboard_sort, name='dashboard_sort'),
 ]

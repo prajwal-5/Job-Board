@@ -31,8 +31,4 @@ class Job(models.Model):
         else:
             return "secondary"
 
-    
-    class Meta:
-        ordering = ['order', 'pk']
-
 
